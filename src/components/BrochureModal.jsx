@@ -21,13 +21,13 @@ export default function BrochureModal({ isOpen, onClose }) {
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
-    }, 800);
+    }, 500);
   };
 
   return (
-    <div 
-      className="modal fade show d-block" 
-      style={{ backgroundColor: 'rgba(0,0,0,0.85)', backdropFilter: 'blur(12px)', zIndex: 1060 }} 
+    <div
+      className="modal fade show d-block"
+      style={{ backgroundColor: 'rgba(0,0,0,0.85)', backdropFilter: 'blur(12px)', zIndex: 1060 }}
       tabIndex="-1"
       onClick={onClose}
     >
@@ -38,9 +38,9 @@ export default function BrochureModal({ isOpen, onClose }) {
               <i className="bi bi-file-earmark-pdf-fill"></i>
               <span>Download Official E-Brochure</span>
             </h5>
-            <button 
-              type="button" 
-              className="btn-close btn-close-white" 
+            <button
+              type="button"
+              className="btn-close btn-close-white"
               onClick={onClose}
             ></button>
           </div>
@@ -72,9 +72,9 @@ export default function BrochureModal({ isOpen, onClose }) {
 
                 <div className="mb-3">
                   <label className="form-label small fw-semibold" style={{ color: 'var(--text-main)' }}>Full Name *</label>
-                  <input 
-                    type="text" 
-                    className="form-control form-control-dark" 
+                  <input
+                    type="text"
+                    className="form-control form-control-dark"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     required
@@ -83,9 +83,9 @@ export default function BrochureModal({ isOpen, onClose }) {
 
                 <div className="mb-3">
                   <label className="form-label small fw-semibold" style={{ color: 'var(--text-main)' }}>Email Address *</label>
-                  <input 
-                    type="email" 
-                    className="form-control form-control-dark" 
+                  <input
+                    type="email"
+                    className="form-control form-control-dark"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     required
@@ -94,9 +94,9 @@ export default function BrochureModal({ isOpen, onClose }) {
 
                 <div className="mb-4">
                   <label className="form-label small fw-semibold" style={{ color: 'var(--text-main)' }}>Phone Number *</label>
-                  <input 
-                    type="tel" 
-                    className="form-control form-control-dark" 
+                  <input
+                    type="tel"
+                    className="form-control form-control-dark"
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                     required
