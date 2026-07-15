@@ -4,21 +4,47 @@ import { brochureData } from '../data/brochureData';
 
 const ContactSection = ({ onOpenModal }) => {
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
     email: '',
-    unitSize: '3 BHK (1789 - 2388 Sq. Ft.)',
+    unitSize: '3 BHK (1789 Sq. Ft.)',
     message: ''
   });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => {
-      setSubmitted(false);
-      setFormData({ name: '', phone: '', email: '', unitSize: '3 BHK (1789 - 2388 Sq. Ft.)', message: '' });
-    }, 4000);
+    setLoading(true);
+    setError('');
+
+    try {
+      const response = await fetch('https://tattvarealty.co.in/backend-files/linq/contact-form-linq-by-raghava.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          mobile: formData.phone,
+          unitSize: formData.unitSize,
+          message: formData.message
+        })
+      });
+
+      const data = await response.json();
+      if (data && data.status === 'success') {
+        window.location.href = '/thank-you.html';
+      } else {
+        setError(data.message || 'An error occurred. Please try again.');
+      }
+    } catch (err) {
+      setError('Could not connect to the server. Please check your connection and try again.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -180,12 +206,21 @@ const ContactSection = ({ onOpenModal }) => {
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="row g-3">
+                  {error && (
+                    <div className="col-12">
+                      <div className="alert alert-danger border-danger border-opacity-25 bg-danger bg-opacity-10 text-danger small py-2 px-3" style={{ borderRadius: '8px' }}>
+                        <i className="bi bi-exclamation-triangle-fill me-2"></i>{error}
+                      </div>
+                    </div>
+                  )}
+
                   <div className="col-12 col-md-6">
                     <label className="form-label small fw-semibold" style={{ fontSize: '0.75rem', color: 'var(--text-main)' }}>FULL NAME *</label>
                     <input
                       type="text"
                       className="form-control form-control-dark"
                       required
+                      disabled={loading}
                       value={formData.name}
                       onChange={e => setFormData({ ...formData, name: e.target.value })}
                     />
@@ -197,6 +232,7 @@ const ContactSection = ({ onOpenModal }) => {
                       type="tel"
                       className="form-control form-control-dark"
                       required
+                      disabled={loading}
                       value={formData.phone}
                       onChange={e => setFormData({ ...formData, phone: e.target.value })}
                     />
@@ -208,6 +244,7 @@ const ContactSection = ({ onOpenModal }) => {
                       type="email"
                       className="form-control form-control-dark"
                       required
+                      disabled={loading}
                       value={formData.email}
                       onChange={e => setFormData({ ...formData, email: e.target.value })}
                     />
@@ -217,6 +254,7 @@ const ContactSection = ({ onOpenModal }) => {
                     <label className="form-label small fw-semibold" style={{ fontSize: '0.75rem', color: 'var(--text-main)' }}>APARTMENT SIZE</label>
                     <select
                       className="form-select form-select-dark"
+                      disabled={loading}
                       value={formData.unitSize}
                       onChange={e => setFormData({ ...formData, unitSize: e.target.value })}
                     >
@@ -234,14 +272,23 @@ const ContactSection = ({ onOpenModal }) => {
                     <textarea
                       className="form-control form-control-dark"
                       rows="3"
+                      disabled={loading}
                       value={formData.message}
                       onChange={e => setFormData({ ...formData, message: e.target.value })}
                     ></textarea>
                   </div>
 
                   <div className="col-12 pt-2">
-                    <button type="submit" className="btn btn-gold w-100 py-2.5 text-uppercase font-heading" style={{ fontSize: '0.85rem' }}>
-                      Submit Enquiry <i className="bi bi-send ms-2"></i>
+                    <button type="submit" className="btn btn-gold w-100 py-2.5 text-uppercase font-heading" style={{ fontSize: '0.85rem' }} disabled={loading}>
+                      {loading ? (
+                        <>
+                          Submitting... <span className="spinner-border spinner-border-sm ms-2" role="status" aria-hidden="true"></span>
+                        </>
+                      ) : (
+                        <>
+                          Submit Enquiry <i className="bi bi-send ms-2"></i>
+                        </>
+                      )}
                     </button>
                   </div>
                 </form>

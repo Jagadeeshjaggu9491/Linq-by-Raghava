@@ -68,7 +68,7 @@ const GallerySection = ({ onOpenModal }) => {
                 >
                   <img 
                     src={img.src} 
-                    alt={img.title} 
+                    alt={`${img.title} - Linq by Raghava Luxury Apartment in Hyderabad, 3 BHK at Neopolis Financial District`} 
                     className="w-100 object-fit-cover" 
                     style={{ height: '260px' }}
                   />
@@ -104,7 +104,7 @@ const GallerySection = ({ onOpenModal }) => {
                 ></button>
                 <img 
                   src={selectedImage.src} 
-                  alt={selectedImage.title} 
+                  alt={`${selectedImage.title} - Linq by Raghava Luxury Apartment in Hyderabad, 3 BHK at Neopolis Financial District`} 
                   className="w-100 h-auto rounded border border-warning border-opacity-50 shadow-lg"
                   style={{ maxHeight: '80vh', objectFit: 'contain' }}
                 />

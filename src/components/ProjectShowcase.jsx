@@ -39,7 +39,7 @@ const ProjectShowcase = ({ onOpenModal }) => {
                 <div className="img-zoom-wrapper rounded mb-3">
                   <img 
                     src={item.src} 
-                    alt={item.title} 
+                    alt={`${item.title} - Linq by Raghava Tallest tower of Hyderabad, Luxury Apartment in Hyderabad by Raghava builder`} 
                     className="w-100 object-fit-cover rounded" 
                     style={{ height: '320px' }}
                   />

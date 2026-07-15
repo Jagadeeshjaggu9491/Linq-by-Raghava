@@ -10,6 +10,7 @@ import LocationAdvantages from './components/LocationAdvantages';
 import GallerySection from './components/GallerySection';
 import ProjectShowcase from './components/ProjectShowcase';
 import AboutBuilder from './components/AboutBuilder';
+import SeoContent from './components/SeoContent';
 import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
 import ReusablePopupModal from './components/ReusablePopupModal';
@@ -72,6 +73,9 @@ function App() {
 
         {/* 10. About Builder */}
         <AboutBuilder onOpenModal={handleOpenModal} />
+
+        {/* 10b. SEO Keyword Section */}
+        <SeoContent />
 
         {/* 11. Contact Section */}
         <ContactSection onOpenModal={handleOpenModal} />

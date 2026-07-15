@@ -11,16 +11,42 @@ const ReusablePopupModal = ({ isOpen, onClose, title = "GET BROCHURE", defaultMe
     message: defaultMessage
   });
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
   if (!isOpen) return null;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => {
-      setSubmitted(false);
-      onClose();
-    }, 2800);
+    setLoading(true);
+    setError('');
+
+    try {
+      const response = await fetch('https://tattvarealty.co.in/backend-files/linq/contact-form-linq-by-raghava.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          mobile: formData.phone,
+          unitSize: formData.unitSize,
+          message: formData.message
+        })
+      });
+
+      const data = await response.json();
+      if (data && data.status === 'success') {
+        window.location.href = '/thank-you.html';
+      } else {
+        setError(data.message || 'An error occurred. Please try again.');
+      }
+    } catch (err) {
+      setError('Could not connect to the server. Please check your connection and try again.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -96,7 +122,7 @@ const ReusablePopupModal = ({ isOpen, onClose, title = "GET BROCHURE", defaultMe
                     <div className="mb-4">
                       <img
                         src={logo}
-                        alt="LINQ BY RAGHAVA"
+                        alt="LINQ by Raghava Official Logo"
                         style={{ height: '54px', objectFit: 'contain', filter: 'brightness(0) invert(1)' }}
                       />
                       <span
@@ -155,7 +181,7 @@ const ReusablePopupModal = ({ isOpen, onClose, title = "GET BROCHURE", defaultMe
                   >
                     <img
                       src="/assets/brochure/extracted-1.jpg"
-                      alt="Raghava LINQ Render"
+                      alt="LINQ by Raghava luxury residential towers elevation rendering"
                       className="w-100 object-fit-cover"
                       style={{ height: '160px', display: 'block' }}
                     />
@@ -244,6 +270,14 @@ const ReusablePopupModal = ({ isOpen, onClose, title = "GET BROCHURE", defaultMe
                   ) : (
                     <form onSubmit={handleSubmit} className="row g-3">
                       
+                      {error && (
+                        <div className="col-12">
+                          <div className="alert alert-danger border-danger border-opacity-25 bg-danger bg-opacity-10 text-danger small py-2 px-3" style={{ borderRadius: '8px' }}>
+                            <i className="bi bi-exclamation-triangle-fill me-2"></i>{error}
+                          </div>
+                        </div>
+                      )}
+
                       {/* FULL NAME */}
                       <div className="col-12 col-md-6">
                         <label className="form-label text-uppercase fw-semibold" style={{ fontSize: '0.72rem', letterSpacing: '0.08em', color: 'var(--text-main)' }}>
@@ -258,6 +292,7 @@ const ReusablePopupModal = ({ isOpen, onClose, title = "GET BROCHURE", defaultMe
                             className="form-control bg-dark border-0 text-light py-2 shadow-none" 
                             style={{ backgroundColor: 'var(--bg-secondary)', fontSize: '0.88rem' }}
                             required 
+                            disabled={loading}
                             value={formData.name}
                             onChange={(e) => setFormData({...formData, name: e.target.value})}
                           />
@@ -278,6 +313,7 @@ const ReusablePopupModal = ({ isOpen, onClose, title = "GET BROCHURE", defaultMe
                             className="form-control bg-dark border-0 text-light py-2 shadow-none" 
                             style={{ backgroundColor: 'var(--bg-secondary)', fontSize: '0.88rem' }}
                             required 
+                            disabled={loading}
                             value={formData.phone}
                             onChange={(e) => setFormData({...formData, phone: e.target.value})}
                           />
@@ -298,6 +334,7 @@ const ReusablePopupModal = ({ isOpen, onClose, title = "GET BROCHURE", defaultMe
                             className="form-control bg-dark border-0 text-light py-2 shadow-none" 
                             style={{ backgroundColor: 'var(--bg-secondary)', fontSize: '0.88rem' }}
                             required 
+                            disabled={loading}
                             value={formData.email}
                             onChange={(e) => setFormData({...formData, email: e.target.value})}
                           />
@@ -316,6 +353,7 @@ const ReusablePopupModal = ({ isOpen, onClose, title = "GET BROCHURE", defaultMe
                           <select 
                             className="form-select bg-dark border-0 text-light py-2 shadow-none" 
                             style={{ backgroundColor: 'var(--bg-secondary)', fontSize: '0.88rem' }}
+                            disabled={loading}
                             value={formData.unitSize}
                             onChange={(e) => setFormData({...formData, unitSize: e.target.value})}
                           >
@@ -342,6 +380,7 @@ const ReusablePopupModal = ({ isOpen, onClose, title = "GET BROCHURE", defaultMe
                             className="form-control bg-dark border-0 text-light shadow-none py-2" 
                             style={{ backgroundColor: 'var(--bg-secondary)', fontSize: '0.88rem' }}
                             rows="3" 
+                            disabled={loading}
                             value={formData.message}
                             onChange={(e) => setFormData({...formData, message: e.target.value})}
                           ></textarea>
@@ -357,8 +396,17 @@ const ReusablePopupModal = ({ isOpen, onClose, title = "GET BROCHURE", defaultMe
                             borderRadius: '10px',
                             fontSize: '0.95rem'
                           }}
+                          disabled={loading}
                         >
-                          SUBMIT REQUEST <i className="bi bi-arrow-right fs-5"></i>
+                          {loading ? (
+                            <>
+                              SUBMITTING... <span className="spinner-border spinner-border-sm ms-2" role="status" aria-hidden="true"></span>
+                            </>
+                          ) : (
+                            <>
+                              SUBMIT REQUEST <i className="bi bi-arrow-right fs-5"></i>
+                            </>
+                          )}
                         </button>
                       </div>
 

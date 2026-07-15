@@ -31,7 +31,7 @@ const MasterPlan = ({ onOpenModal }) => {
             >
               <img 
                 src={masterPlanImg} 
-                alt="LINQ by Raghava Master Plan 3D Render" 
+                alt="LINQ by Raghava 9.2 Acres site zoning and Master Plan layout - Tallest tower of Hyderabad by Raghava builder" 
                 className="w-100 h-100 object-fit-cover rounded-3"
                 style={{ display: 'block' }}
               />

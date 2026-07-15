@@ -1,0 +1,21 @@
+{
+  "short_name": "Raghava LINQ",
+  "name": "LINQ by Raghava - Neopolis, Kokapet, Hyderabad",
+  "icons": [
+    {
+      "src": "/favicon.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/logo.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#111111",
+  "theme_color": "#B89B82",
+  "display": "standalone",
+  "orientation": "portrait"
+}

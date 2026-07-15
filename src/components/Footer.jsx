@@ -28,7 +28,7 @@ const Footer = ({ onOpenModal }) => {
         <div className="d-flex flex-column align-items-center mb-4">
           <img
             src={logo}
-            alt="LINQ by Raghava"
+            alt="LINQ by Raghava Developer Logo"
             style={{ height: '52px', objectFit: 'contain', marginBottom: '12px' }}
           />
           <span

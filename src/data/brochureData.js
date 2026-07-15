@@ -9,8 +9,8 @@ export const brochureData = {
   builder: "Raghava Projects",
   reraNo: "P02400007892 (Telangana RERA Approved)",
   contact: {
-    phones: ["+91 8897035800", "8864062626"],
-    whatsapp: "918897035800",
+    phones: ["+91 9620832395"],
+    whatsapp: "919620832395",
     locationText: "Neopolis, Kokapet, Hyderabad"
   },
   highlights: [

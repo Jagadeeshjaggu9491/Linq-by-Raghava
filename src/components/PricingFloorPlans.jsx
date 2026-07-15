@@ -133,7 +133,7 @@ const PricingFloorPlans = ({ onOpenModal }) => {
                 <div className="bg-dark p-2 rounded border border-warning border-opacity-25 img-zoom-wrapper position-relative">
                   <img
                     src={activeTowerData.image}
-                    alt={`${activeTowerData.name} Floor Plan`}
+                    alt={`Linq by Raghava ${activeTowerData.name} Floor Plan - Luxury 3 BHK apartment at Neopolis Kokapet Financial District`}
                     className="w-100 h-auto rounded"
                     style={{ maxHeight: '650px', objectFit: 'contain' }}
                   />

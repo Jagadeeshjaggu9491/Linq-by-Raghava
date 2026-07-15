@@ -7,6 +7,11 @@ import hero3 from '../assets/hero-3.jpg';
 
 const HeroSection = ({ onOpenModal }) => {
   const heroImages = [hero1, hero2, hero3];
+  const heroAlts = [
+    "Tallest tower of Hyderabad - LINQ by Raghava Luxury Apartment in Hyderabad at Neopolis Kokapet",
+    "Ultra luxury apartment in Kokapet Neopolis - Hi rise living at Hyderabad by Raghava builder",
+    "LINQ at Kokapet - Luxury living in Hyderabad near Hitech City Financial District"
+  ];
   const [currentSlide, setCurrentSlide] = useState(0);
 
   // Auto-play slider every 5 seconds
@@ -35,7 +40,7 @@ const HeroSection = ({ onOpenModal }) => {
           <motion.img 
             key={currentSlide}
             src={heroImages[currentSlide]} 
-            alt={`LINQ by Raghava Hero Slide ${currentSlide + 1}`} 
+            alt={heroAlts[currentSlide]} 
             className="w-100 h-100 object-fit-cover position-absolute top-0 start-0" 
             style={{ objectPosition: 'center 40%' }}
             initial={{ opacity: 0, scale: 1.04 }}

@@ -153,7 +153,7 @@ const AboutProject = ({ onOpenModal }) => {
               <div className="img-zoom-wrapper border border-warning border-opacity-30 shadow-lg rounded-3">
                 <img 
                   src="/assets/brochure/img-p13-34-2000x2000.png" 
-                  alt="Where Hyderabad looks up" 
+                  alt="LINQ by Raghava luxury apartments kid and family play zone in Neopolis, Kokapet, Hyderabad" 
                   className="w-100 h-auto rounded-3" 
                   style={{ maxHeight: '520px', objectFit: 'cover' }}
                 />

@@ -43,7 +43,7 @@ const LocationAdvantages = ({ onOpenModal }) => {
             >
               <img 
                 src={brochureData.locationMapImage} 
-                alt="LINQ by Raghava Location Map" 
+                alt="LINQ by Raghava location map - 3 bhk in gachibowli kokapet, financial district Hyderabad apartment projects near Hitech City" 
                 className="w-100 h-100 object-fit-cover rounded-3"
                 style={{ display: 'block' }}
               />
